@@ -32,7 +32,7 @@ Uses predefined view-offsets and injects mouse events using WinAPI.
 7. Press INSERT key to play track
 
 ### Important
-Make sure you're in the correct position before play the song. Otherwise it won't work.
+Make sure you're in the correct position before playing the song. Otherwise it won't work.
 Use this for reference: https://i.imgur.com/SIXngZg.jpg
 
 Stand in the spot shown at the bottom, and look at the spot shown at the top.
