@@ -28,7 +28,8 @@ Uses predefined view-offsets and injects mouse events using WinAPI.
 3. Open an MIDI
 4. Set your Overwatch mouse sensitivity 
 5. Select a track
-6. Press INSERT key to play track
+6. Focus Overwatch window, and assume position
+7. Press INSERT key to play track
 
 Heroes it works well with: Mei, Soldier76
 
