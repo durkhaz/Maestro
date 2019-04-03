@@ -18,17 +18,17 @@ The map "Paris" has a playable piano. You shoot the keys to hear a tone.
 This application can open MIDI files and allows you to play songs automatically. 
 Does not hook into the Overwatch process, it is essentially blind.
 Uses predefined view-offsets and injects mouse events using WinAPI.
-Parses MIDI files using [Midifile](https://github.com/craigsapp/midifile)
+Parses MIDI files using [Midifile](https://github.com/craigsapp/midifile).
 
 ### Features
-- Supports playback of any track combinations defined inside the MIDI
+- Supports playback of any MIDI track combination
 - Shows number of track events
 - Adjustable playback speed
 
 ### How to use
 1. Launch Overwatch
 2. Run Maestro
-3. Open an MIDI
+3. Open a MIDI file
 4. Set your Overwatch mouse sensitivity 
 5. Select a track
 6. Focus Overwatch window, and assume position
