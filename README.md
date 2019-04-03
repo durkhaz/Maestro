@@ -3,8 +3,10 @@ A piano aimbot for the Overwatch map "Paris".
 
 ### Disclaimer
 **THIS TOOL MIGHT GET YOU BANNED, AS AT YOUR OWN RISK!**
+
 I used it for about two weeks myself (only ever on custom games), and my account is fine.
 However, this tool does have similarities to so called **pixel aimbots**, so it is risky.
+
 **THIS TOOL MIGHT GET YOU BANNED, AS AT YOUR OWN RISK!**
 
 ###### What it does
