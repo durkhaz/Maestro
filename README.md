@@ -10,6 +10,8 @@ However, this tool does have similarities to so called **pixel aimbots**, so it 
 **THIS TOOL MIGHT GET YOU BANNED, AS AT YOUR OWN RISK!**
 
 
+[###Download](https://github.com/durkhaz/Maestro/releases)
+
 
 ### What it does
 The map "Paris" has a playable piano. You shoot the keys to hear a tone.
@@ -36,5 +38,4 @@ Heroes it works well with: Mei, Soldier76
 Use this for reference: https://i.imgur.com/SIXngZg.jpg
 
 Stand in the spot shown at the bottom, and look at the spot shown at the top.
-
 
