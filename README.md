@@ -38,5 +38,5 @@ Use this for reference: https://i.imgur.com/SIXngZg.jpg
 Stand in the spot shown at the bottom, and look at the spot shown at the top.
 
 
-###Download
+### Download
 https://github.com/durkhaz/Maestro/releases
