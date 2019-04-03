@@ -31,13 +31,14 @@ Uses predefined view-offsets and injects mouse events using WinAPI.
 6. Focus Overwatch window, and assume position
 7. Press INSERT key to play track
 
-Heroes it works well with: Mei, Soldier76
-
-**IMPORTANT**: Make sure you're in the correct position before playing. Otherwise it won't work.
+### Important
+Make sure you're in the correct position before play the song. Otherwise it won't work.
 Use this for reference: https://i.imgur.com/SIXngZg.jpg
 
 Stand in the spot shown at the bottom, and look at the spot shown at the top.
+I recommend using stick movement (controller) to get in position, because it's more precise.
 
+Heroes it works well with: Mei, Soldier76
 
 ### Download
 https://github.com/durkhaz/Maestro/releases
