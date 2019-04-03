@@ -23,12 +23,14 @@ using namespace smf;
 
 #define OW_180_CONSTANT 27273.0f //moves 180 degrees while using sens 1
 
+
 class Melody {
 public:
 	double tick;
 	double duration;
 	int    pitch;
 };
+
 
 void ClearMaestro();
 void OpenFileDialog();
