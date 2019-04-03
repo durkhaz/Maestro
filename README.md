@@ -1,5 +1,7 @@
 # Maestro
 A piano aimbot for the Overwatch map "Paris".
+Video of it in action: 
+https://youtu.be/lSovYVwk3UA
 
 ### Disclaimer
 **THIS TOOL MIGHT GET YOU BANNED, USE AT YOUR OWN RISK!**
