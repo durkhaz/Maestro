@@ -116,7 +116,6 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
 			RegisterHotKey(hwnd, 1, MOD_NOREPEAT, VK_INSERT);
 			RegisterHotKey(hwnd, 2, MOD_NOREPEAT, VK_DELETE);
-			SetWindowPos(hwnd, NULL, 3000, 0, 200, 200, SWP_NOSIZE);
 			HICON hIcon = static_cast<HICON>(LoadImage(hInst, MAKEINTRESOURCE(IDI_ICON1), IMAGE_ICON, 0, 0, LR_DEFAULTCOLOR | LR_SHARED | LR_DEFAULTSIZE));
 			SendMessageW(hwnd, WM_SETICON, ICON_BIG, reinterpret_cast<LPARAM>(hIcon));
 			SetWindowText(hwnd, reinterpret_cast<LPCWSTR>(AppName.c_str()));
@@ -154,7 +153,10 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 					SetWindowText(hMaestro, reinterpret_cast<LPCWSTR>(TitleStr.c_str()));
 				}
 				else
+				{
 					bIsPlayingPiano = false;
+					std::wcout << L"Stopping MIDI \"" << Filename << L"\"" << std::endl;
+				}
 				break;
 			}
 			else if (HIWORD(lParam) == VK_DELETE)
@@ -303,6 +305,7 @@ void ToggleSensitivity()
 
 void PlayMidi()
 {
+	std::wcout << L"Playing MIDI \"" << Filename << L"\"" << std::endl;
 	for (unsigned int i = 0; i < CurrentMelody.size(); i++)
 	{
 		if (!bIsPlayingPiano)
