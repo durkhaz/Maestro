@@ -11,6 +11,7 @@ Uses predefined view-offsets and injects mouse events using WinAPI.
 Parses MIDI files using [Midifile](https://github.com/craigsapp/midifile).
 
 ### Features
+- Can listen to MIDI keyboards
 - Supports playback of any MIDI track combination
 - Shows number of track events
 - Adjustable playback speed
