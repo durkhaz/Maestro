@@ -1,5 +1,4 @@
-#include <windows.h>
-#include <string>
+#include "Utils.h"
 #include <vector>
 #include <thread>
 #include <stdlib.h> 
@@ -11,6 +10,7 @@
 #include <wrl\client.h> // COM Smart pointer
 #include "MidiFile.h"
 #include "Offsets.h"
+#include "RtMidi.h"
 
 #pragma comment(lib,"comctl32.lib")
 #pragma comment(linker,"/manifestdependency:\"type='win32' name='Microsoft.Windows.Common-Controls' version='6.0.0.0' processorArchitecture='*' publicKeyToken='6595b64144ccf1df' language='*'\"")
@@ -41,21 +41,22 @@ inline std::wstring GetEditboxString(HWND hEdit);
 void SetAngle(float pitch, float yaw, bool bDoClick);
 void SetPreviewAngle(ANGLES QueuedLocalPreviewRotation, HWND hwnd);
 INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam);
-std::string NarrowString(const std::wstring &s);
 void ConvertToMelody(MidiFile& midifile, std::vector<Melody>& melody);
 void SortMelody(std::vector<Melody>& melody);
 int  CompareNotes(const void* a, const void* b);
+bool InitMidiInput();
 
 HINSTANCE hInst;
+const std::wstring KeyboardStatus[] = { L"Start Keyboard", L"Stop Keyboard" };
 const std::wstring AppStatus[] = { L"Idle", L"Playing" };
 const std::wstring AppName = L"Maestro";
+const std::wstring AppErrorTitle = L"SCHEISSE!";
 const std::wstring AppTitle = L"%s \u266A [%s] \u266A %s";
 const COMDLG_FILTERSPEC FileTypes[] = { { L"MIDI Sequence (*.mid)", L"*.mid" } };
 ANGLES CurrentRotation = { 0.f, 0.f, FALSE};
 HWND hMaestro = NULL;
 HWND hOverwatch = NULL;
 ANGLES QueuedPreviewRotation;
-HHOOK MouseHook;
 HWND hPreviouslyFocussedControl = NULL;
 POINT CursorPosBeforePreview = { 0, 0 };
 bool bIsPreviewing = FALSE;
@@ -69,6 +70,7 @@ MidiFile MidiSequence;
 std::vector<Melody> CurrentMelody;
 std::string Filepath;
 std::wstring Filename;
+RtMidiIn *MIDIInput = nullptr;
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {
@@ -77,21 +79,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	UNREFERENCED_PARAMETER(lpCmdLine);
 	UNREFERENCED_PARAMETER(hPrevInstance);
 	return static_cast<int>(DialogBox(hInstance, MAKEINTRESOURCE(IDD_MAIN), NULL, DlgProc));
-}
-
-// On Windows 10, this won't get passed down the chain, and be essentially useless
-LRESULT CALLBACK MaskMouseInjection(int nCode, WPARAM wParam, LPARAM lParam)
-{
-	if (nCode == HC_ACTION)
-	{
-		MSLLHOOKSTRUCT* MouseHookPointer = (MSLLHOOKSTRUCT *)lParam;
-		if ((MouseHookPointer->flags & LLMHF_LOWER_IL_INJECTED) || (MouseHookPointer->flags & LLMHF_INJECTED))
-		{
-			MouseHookPointer->flags &= ~LLMHF_LOWER_IL_INJECTED;
-			MouseHookPointer->flags &= ~LLMHF_INJECTED;
-		}
-	}
-	return CallNextHookEx(MouseHook, nCode, wParam, lParam);
 }
 
 INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
@@ -104,15 +91,6 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			iccex.dwSize = sizeof(INITCOMMONCONTROLSEX);
 			iccex.dwICC = ICC_BAR_CLASSES | ICC_STANDARD_CLASSES;
 			LaunchConsole();
-
-			/*
-			if (!(MouseHook = SetWindowsHookEx(WH_MOUSE_LL, MaskMouseInjection, GetModuleHandle(0), NULL)))
-			{
-				MessageBox(NULL, L"Couldn't install hook. Quitting.", L"SCHEISSE", MB_ICONERROR);
-				EndDialog(hwnd, 0);
-				break;
-			}
-			*/
 
 			RegisterHotKey(hwnd, 1, MOD_NOREPEAT, VK_INSERT);
 			RegisterHotKey(hwnd, 2, MOD_NOREPEAT, VK_DELETE);
@@ -135,7 +113,7 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			hMaestro = hwnd;
 			hOverwatch = ::FindWindow(NULL, L"Overwatch");
 			if (!hOverwatch)
-				MessageBox(hwnd, L"Overwatch isn't running!", L"SCHEISSE", MB_OK | MB_ICONERROR);
+				MessageBox(hwnd, L"Overwatch isn't running!", AppErrorTitle.c_str(), MB_OK | MB_ICONERROR);
 
 			break;
 		}
@@ -194,6 +172,26 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 				case IDC_SETSENS:
 					GameSensitivy = static_cast<float>(::strtod((NarrowString(GetEditboxString(GetDlgItem(hwnd, IDC_SENS)))).c_str(), NULL));
 					break;
+				case IDC_TOGGLEKEYBOARD:
+				{
+					if (!MIDIInput)
+					{
+						try { MIDIInput = new RtMidiIn();}
+						catch (RtMidiError &error) { error.printMessage(); break; }
+						if (!InitMidiInput())
+						{
+							delete MIDIInput;
+							MIDIInput = nullptr;
+						}
+					}
+					else
+					{
+						delete MIDIInput;
+						MIDIInput = nullptr;
+					}
+					SetWindowText(GetDlgItem(hwnd, IDC_TOGGLEKEYBOARD), reinterpret_cast<LPCWSTR>(KeyboardStatus[MIDIInput ? 1 : 0].c_str()));
+					break;
+				}
 				}
 				break;
 			}
@@ -230,7 +228,8 @@ INT_PTR CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 			break;
 		}
 		case WM_CLOSE:
-			UnhookWindowsHookEx(MouseHook);
+			if (MIDIInput)
+				delete MIDIInput;
 			UnregisterHotKey(hwnd, 1);
 			UnregisterHotKey(hwnd, 2);
 			EndDialog(hwnd, 0);
@@ -303,6 +302,18 @@ void ToggleSensitivity()
 	bIsSensitivitySet = !bIsSensitivitySet;
 }
 
+void PlayNote(int pitch)
+{
+	if (pitch >= 24 && pitch <= 88)
+	{
+		ANGLES Angle = PianoKeyAngles[pitch - 24];
+		std::wcout << L"Playing key " << pitch - 24 << std::endl;
+		SetAngle(Angle.pitch, Angle.yaw, true);
+	}
+	else
+		std::wcout << L"Ignoring invalid note with pitch " << pitch << std::endl;
+}
+
 void PlayMidi()
 {
 	std::wcout << L"Playing MIDI \"" << Filename << L"\"" << std::endl;
@@ -311,13 +322,7 @@ void PlayMidi()
 		if (!bIsPlayingPiano)
 			break;
 
-		if (CurrentMelody[i].pitch >= 24 && CurrentMelody[i].pitch <= 88)
-		{
-			ANGLES Angle = PianoKeyAngles[CurrentMelody[i].pitch - 24];
-			SetAngle(Angle.pitch, Angle.yaw, true);
-		}
-		else
-			std::wcout << L"Ignoring invalid note with pitch " << CurrentMelody[i].pitch << std::endl;
+		PlayNote(CurrentMelody[i].pitch);
 
 		double SleepTime = 150;
 		if (i + 1 != CurrentMelody.size())
@@ -459,10 +464,44 @@ inline std::wstring GetEditboxString(HWND hEdit)
 	return str;
 }
 
-std::string NarrowString(const std::wstring &s)
+void MidiInputCallback(double deltatime, std::vector< unsigned char > *message, void *userData)
 {
-	std::string wsTmp(s.begin(), s.end());
-	return wsTmp;
+	size_t nBytes = message->size();
+	for (unsigned int i = 0; i < nBytes; i++)
+		std::wcout << L"Byte " << i << L" = " << (int)message->at(i) << L", ";
+	if (nBytes > 0)
+		std::wcout << L"stamp = " << deltatime << std::endl;
+
+	if ((int)message->at(0) == 144)
+		PlayNote((int)message->at(1));
+}
+
+
+bool InitMidiInput()
+{
+	unsigned int nPorts = MIDIInput->getPortCount();
+	std::wcout << L"There are " << nPorts << L" MIDI input sources available." << std::endl;
+	if (nPorts == 0)
+		return FALSE;
+	std::string portName;
+	for (unsigned int i = 0; i < nPorts; i++) 
+	{
+		try 
+		{
+			portName = MIDIInput->getPortName(i);
+		}
+		catch (RtMidiError &error) 
+		{
+			error.printMessage();
+			return FALSE;
+		}
+		std::wcout << L"  Input Port #" << i + 1 << L": " << WidenString(portName) << std::endl;
+	}
+	std::wcout << L"Connecting to port 1" << std::endl;
+	MIDIInput->openPort(0);
+	MIDIInput->setCallback(&MidiInputCallback);
+	MIDIInput->ignoreTypes(TRUE, TRUE, TRUE);
+	return TRUE;
 }
 
 void LaunchConsole()
@@ -496,9 +535,9 @@ void LaunchConsole()
 	freopen_s(&CErrorHandle, "CONOUT$", "w", stderr);
 
 	// Move console over to other screen and maximize, if possible
-	HWND hConsole = GetConsoleWindow();
-	SetWindowPos(hConsole, NULL, 3000, 0, 200, 200, SWP_NOSIZE);
-	ShowWindow(hConsole, SW_MAXIMIZE);
+	//HWND hConsole = GetConsoleWindow();
+	//SetWindowPos(hConsole, NULL, 3000, 0, 200, 200, SWP_NOSIZE);
+	//ShowWindow(hConsole, SW_MAXIMIZE);
 
 	std::wcout << cTitle << L" successfully allocated." << std::endl;
 }
