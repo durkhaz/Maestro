@@ -9,6 +9,8 @@ This application can open MIDI files and allows you to play songs automatically.
 Does not hook into the Overwatch process, it is essentially blind.
 Uses predefined view-offsets and injects mouse events using WinAPI.
 Parses MIDI files using [Midifile](https://github.com/craigsapp/midifile).
+Interfaces with MIDI keyboards using [RtMidi](http://www.music.mcgill.ca/~gary/rtmidi/index.html#intro).
+
 
 ### Features
 - Can listen to MIDI keyboards
@@ -19,9 +21,9 @@ Parses MIDI files using [Midifile](https://github.com/craigsapp/midifile).
 ### How to use
 1. Launch Overwatch
 2. Run Maestro
-3. Open a MIDI file
+3. Open a MIDI file or connect keyboard
 4. Set your Overwatch mouse sensitivity 
-5. Select a track
+5. If MIDI-file, select a track
 6. Focus Overwatch window, and assume position
 7. Press INSERT key to play track
 
