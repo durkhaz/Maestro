@@ -22,33 +22,33 @@
     <ProjectGuid>{ED70FB26-E553-4E78-8773-303F9868F101}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Win32Project1</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0.17763.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
     <ProjectName>Maestro</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v141</PlatformToolset>
+    <PlatformToolset>v142</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
@@ -72,25 +72,25 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\include;$(IncludePath)</IncludePath>
-    <SourcePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\src;$(SourcePath)</SourcePath>
+    <IncludePath>$(SolutionDir)\Maestro\external\midifile\include;$(SolutionDir)\Maestro\external\rtmidi;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)\Maestro\external\midifile\src;$(SolutionDir)\Maestro\external\rtmidi;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <IncludePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\;C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\include;$(IncludePath)</IncludePath>
-    <SourcePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)\Maestro\external\midifile\src;$(SolutionDir)\Maestro\external\rtmidi;$(SourcePath)</SourcePath>
     <TargetName>Maestro</TargetName>
+    <IncludePath>$(SolutionDir)\Maestro\external\midifile\include;$(SolutionDir)\Maestro\external\rtmidi;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\include;$(IncludePath)</IncludePath>
-    <SourcePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\src;$(SourcePath)</SourcePath>
+    <IncludePath>$(SolutionDir)\Maestro\external\midifile\include;$(SolutionDir)\Maestro\external\rtmidi;$(IncludePath)</IncludePath>
+    <SourcePath>$(SolutionDir)\Maestro\external\midifile\src;$(SolutionDir)\Maestro\external\rtmidi;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\;C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\include;$(IncludePath)</IncludePath>
-    <SourcePath>C:\Users\patri\Documents\Visual Studio 2017\Projects\Maestro\Maestro\external\src;$(SourcePath)</SourcePath>
+    <SourcePath>$(SolutionDir)\Maestro\external\midifile\src;$(SolutionDir)\Maestro\external\rtmidi;$(SourcePath)</SourcePath>
     <TargetName>Maestro</TargetName>
+    <IncludePath>$(SolutionDir)\Maestro\external\midifile\include;$(SolutionDir)\Maestro\external\rtmidi;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -159,23 +159,23 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="external\src\Binasc.cpp" />
-    <ClCompile Include="external\src\MidiEvent.cpp" />
-    <ClCompile Include="external\src\MidiEventList.cpp" />
-    <ClCompile Include="external\src\MidiFile.cpp" />
-    <ClCompile Include="external\src\MidiMessage.cpp" />
-    <ClCompile Include="external\src\Options.cpp" />
-    <ClCompile Include="external\src\RtMidi.cpp" />
+    <ClCompile Include="external\midifile\src\Binasc.cpp" />
+    <ClCompile Include="external\midifile\src\MidiEvent.cpp" />
+    <ClCompile Include="external\midifile\src\MidiEventList.cpp" />
+    <ClCompile Include="external\midifile\src\MidiFile.cpp" />
+    <ClCompile Include="external\midifile\src\MidiMessage.cpp" />
+    <ClCompile Include="external\midifile\src\Options.cpp" />
+    <ClCompile Include="external\rtmidi\RtMidi.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="external\include\Binasc.h" />
-    <ClInclude Include="external\include\MidiEvent.h" />
-    <ClInclude Include="external\include\MidiEventList.h" />
-    <ClInclude Include="external\include\MidiFile.h" />
-    <ClInclude Include="external\include\MidiMessage.h" />
-    <ClInclude Include="external\include\Options.h" />
-    <ClInclude Include="external\include\RtMidi.h" />
+    <ClInclude Include="external\midifile\include\Binasc.h" />
+    <ClInclude Include="external\midifile\include\MidiEvent.h" />
+    <ClInclude Include="external\midifile\include\MidiEventList.h" />
+    <ClInclude Include="external\midifile\include\MidiFile.h" />
+    <ClInclude Include="external\midifile\include\MidiMessage.h" />
+    <ClInclude Include="external\midifile\include\Options.h" />
+    <ClInclude Include="external\rtmidi\RtMidi.h" />
     <ClInclude Include="Offsets.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Utils.h" />
