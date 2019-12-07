@@ -13,60 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\midi">
-      <UniqueIdentifier>{b160412d-7fd1-47d7-b8d4-55f4948a8029}</UniqueIdentifier>
+    <Filter Include="Header Files\rtmidi">
+      <UniqueIdentifier>{618caade-cf24-416a-b6a4-7b9d4b97cabe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\midi">
-      <UniqueIdentifier>{e38231bb-00e0-4a6a-8155-818f07229d79}</UniqueIdentifier>
+    <Filter Include="Header Files\midifile">
+      <UniqueIdentifier>{77114c39-8a38-416d-b7c6-1e284ec49418}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\midifile">
+      <UniqueIdentifier>{92fda317-2ab2-4f46-a204-56f18d4112ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\rtmidi">
+      <UniqueIdentifier>{0ad45db8-c837-40f5-8bab-387dc32fb5a8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\Binasc.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\rtmidi\RtMidi.cpp">
+      <Filter>Source Files\rtmidi</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\MidiEvent.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\Binasc.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\MidiEventList.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\MidiEvent.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\MidiFile.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\MidiEventList.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\MidiMessage.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\MidiFile.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\Options.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\MidiMessage.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
-    <ClCompile Include="external\src\RtMidi.cpp">
-      <Filter>Source Files\midi</Filter>
+    <ClCompile Include="external\midifile\src\Options.cpp">
+      <Filter>Source Files\midifile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\Binasc.h">
-      <Filter>Header Files\midi</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\MidiEvent.h">
-      <Filter>Header Files\midi</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\MidiEventList.h">
-      <Filter>Header Files\midi</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\MidiFile.h">
-      <Filter>Header Files\midi</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\MidiMessage.h">
-      <Filter>Header Files\midi</Filter>
-    </ClInclude>
-    <ClInclude Include="external\include\Options.h">
-      <Filter>Header Files\midi</Filter>
     </ClInclude>
     <ClInclude Include="Offsets.h">
       <Filter>Header Files</Filter>
@@ -74,8 +62,26 @@
     <ClInclude Include="Utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="external\include\RtMidi.h">
-      <Filter>Header Files\midi</Filter>
+    <ClInclude Include="external\rtmidi\RtMidi.h">
+      <Filter>Header Files\rtmidi</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\Binasc.h">
+      <Filter>Header Files\midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\MidiEvent.h">
+      <Filter>Header Files\midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\MidiEventList.h">
+      <Filter>Header Files\midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\MidiFile.h">
+      <Filter>Header Files\midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\MidiMessage.h">
+      <Filter>Header Files\midifile</Filter>
+    </ClInclude>
+    <ClInclude Include="external\midifile\include\Options.h">
+      <Filter>Header Files\midifile</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
