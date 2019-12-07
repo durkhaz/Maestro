@@ -1,0 +1,8 @@
+[submodule "midifile"]
+	path = Maestro/external/midifile
+	url = https://github.com/craigsapp/midifile.git
+	ignore = dirty
+[submodule "rtmidi"]
+	path = Maestro/external/rtmidi
+	url = https://github.com/thestk/rtmidi.git
+	ignore = dirty
