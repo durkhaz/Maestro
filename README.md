@@ -42,3 +42,12 @@ Heroes it works well with: Mei, Soldier76
 https://github.com/durkhaz/Maestro/releases
 
 **Disclaimer: THIS TOOL MIGHT GET YOU BANNED, USE AT YOUR OWN RISK!**
+
+### Setup the project
+**Clone and initialize the repository**
+
+```
+git clone https://github.com/durkhaz/Maestro.git
+cd Maestro
+git submodule update --init
+```
