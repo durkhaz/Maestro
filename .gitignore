@@ -1,35 +1,7 @@
-/*
-!/Maestro
-/Maestro/x64
-# Prerequisites
-*.d
+# Note: This folder has to exist. Once the User Account manager is implemented, make sure it creates this folder in case it's missing and delete this .gitignore file.
 
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+# Visual Studio Files
+.vs
+Debug
+Release
+x64
